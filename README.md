@@ -72,3 +72,5 @@ aws cloudformation create-stack --stack-name handson-cfn-elb --template-body fil
 - [RDSのYAML](./cloudformation/rds.yaml)
 
 - [ELBのYAML](./cloudformation/elb.yaml)
+
+- [S3のYAML](./cloudformation/s3-webhosting.yaml)
