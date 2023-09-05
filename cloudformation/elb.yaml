@@ -5,6 +5,9 @@ Description: Hands-on template for ALB
 #  aws cloudformation create-stack --stack-name handson-cfn-elb --template-body file://elb.yml
 #------------------------------------------------------
 
+# スタック名
+# handson-cfn-elb
+
 Parameters:
   VPCStack:
     Type: String
@@ -12,6 +15,10 @@ Parameters:
   EC2Stack:
     Type: String
     Default: handson-cfn-ec2
+
+#------------------------------------------------------
+#  ELB
+#------------------------------------------------------
 
 Resources:
   FrontLB:
@@ -58,7 +65,9 @@ Resources:
           FromPort: 80
           ToPort: 80
           CidrIp: 0.0.0.0/0
-
+#------------------------------------------------------
+#  Outputsセクション
+#------------------------------------------------------
 Outputs:
   FrontLBEndpoint:
     Value: !GetAtt FrontLB.DNSName

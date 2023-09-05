@@ -6,6 +6,9 @@ Description: Hands-on template for EC2
 #  aws cloudformation create-stack --stack-name handson-cfn-ec2 --template-body file://ec2.yaml
 #------------------------------------------------------
 
+# スタック名
+# handson-cfn-ec2
+
 #------------------------------------------------------
 #  パラメーター(VPC)
 #------------------------------------------------------
@@ -22,10 +25,10 @@ Resources:
     Type: AWS::EC2::Instance
     Properties:
       # Ubuntu 22.04を使用
-      ImageId: ami-088da9557aae42f39
+      # ImageId: ami-088da9557aae42f39
       # Amazon linuxを利用
       # AMIのイメージ
-      # ImageId: ami-09bad682e5ae72267
+      ImageId: ami-09bad682e5ae72267
       # インスタンスタイプ
       InstanceType: t3.micro
       # セキュリティインポート
@@ -45,6 +48,18 @@ Resources:
       # インストールコマンド
       UserData: !Base64 |
         #! /bin/bash
+        yum update -y
+        amazon-linux-extras install php7.2 -y
+        yum -y install mysql httpd php-mbstring php-xml
+
+        wget http://ja.wordpress.org/latest-ja.tar.gz -P /tmp/
+        tar zxvf /tmp/latest-ja.tar.gz -C /tmp
+        cp -r /tmp/wordpress/* /var/www/html/
+        touch /var/www/html/.check_alive
+        chown apache:apache -R /var/www/html
+
+        systemctl enable httpd.service
+        systemctl start httpd.service
       # セキュリティーグループ使用
       SecurityGroupIds:
         - !Ref EC2SG

@@ -5,6 +5,9 @@ Description: Hands-on template for VPC
 #  AWS CLIの実行の仕方
 #  aws cloudformation create-stack --stack-name handson-cfn --template-body file://vpc.yaml
 #------------------------------------------------------
+
+#スタック名： handson-cfn
+
 Resources:
 #------------------------------------------------------
 #  VPC

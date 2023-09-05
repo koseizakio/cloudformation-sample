@@ -60,26 +60,29 @@ aws cloudformation create-stack --stack-name handson-cfn-rds --template-body fil
 ```
 
 ```
-aws cloudformation create-stack --stack-name handson-cfn-elb --template-body file://vpc.yaml
+aws cloudformation create-stack --stack-name handson-cfn-elb --template-body file://elb.yaml
 ```
 
 ### CloudformationのYAMLファイルについて
 
-- [VPCのYAML](./cloudformation/vpc.yaml) 
-
 VPCにてap-northeast-1aとap-northeast-1cのパプリックサブネットとプライベートサブネットの仮想ネットワーク構築
-- [EC2のYAML](./cloudformation/ec2.yaml)
+
+- [VPCのYAML](./cloudformation/vpc.yaml) 
 
 EC2一台構築
 
-- [RDSのYAML](./cloudformation/rds.yaml)
+- [EC2のYAML](./cloudformation/ec2.yaml)
 
 RDS一台構築
 
-- [ELBのYAML](./cloudformation/elb.yaml)
+- [RDSのYAML](./cloudformation/rds.yaml)
 
 ap-northeast-1aとap-northeast-1cのロードバランサー構築
 
-- [S3のYAML](./cloudformation/s3-webhosting.yaml)
+- [ELBのYAML](./cloudformation/elb.yaml)
+
 
 S3で静的サイトホスティングする用のCloudformation
+
+- [S3のYAML](./cloudformation/s3-webhosting.yaml)
+

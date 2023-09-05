@@ -1,6 +1,25 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Hands-on template for RDS
 
+#------------------------------------------------------
+#  AWS CLIの実行の仕方
+#  aws cloudformation create-stack --stack-name handson-cfn-rds --template-body file://ec2.yaml
+#
+# スタック名
+# handson-cfn-rds
+# DBユーザー
+# dbmaster
+# パスワード
+# H&ppyHands0n
+#
+# データベース名
+# wordpress
+#------------------------------------------------------
+
+#------------------------------------------------------
+#  パラメーター(RDS)
+#------------------------------------------------------
+
 Parameters:
   VPCStack:
     Type: String
@@ -13,7 +32,9 @@ Parameters:
     Default: H&ppyHands0n
     NoEcho: true
 
-  
+#------------------------------------------------------
+#  RDSInstance
+#------------------------------------------------------
 Resources:
   DBInstance:
     Type: AWS::RDS::DBInstance
@@ -30,7 +51,9 @@ Resources:
       DBSubnetGroupName: !Ref DBSubnetGroup
       VPCSecurityGroups:
         - !Ref DBSecurityGroup
-
+#------------------------------------------------------
+#  サブネット
+#------------------------------------------------------
   DBSubnetGroup: 
     Type: AWS::RDS::DBSubnetGroup
     Properties: 
@@ -38,7 +61,9 @@ Resources:
       SubnetIds: 
         - Fn::ImportValue: !Sub ${VPCStack}-PrivateSubnet1
         - Fn::ImportValue: !Sub ${VPCStack}-PrivateSubnet2
-
+#------------------------------------------------------
+#  セキュリティーグループ(EC2Instance)
+#------------------------------------------------------
   DBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties: 
@@ -50,8 +75,9 @@ Resources:
           FromPort: 3306
           ToPort: 3306
           CidrIp: 10.0.0.0/24
-
-
+#------------------------------------------------------
+#  Outputsセクション
+#------------------------------------------------------
 Outputs:
   DBEndpoint:
     Value: !GetAtt DBInstance.Endpoint.Address
