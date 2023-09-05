@@ -48,6 +48,8 @@ Resources:
       MasterUserPassword: !Ref DBPassword
       DBName: wordpress
       BackupRetentionPeriod: 0
+      MultiAZ: 'false'
+      AvailabilityZone: !Sub ${AWS::Region}a
       DBSubnetGroupName: !Ref DBSubnetGroup
       VPCSecurityGroups:
         - !Ref DBSecurityGroup
